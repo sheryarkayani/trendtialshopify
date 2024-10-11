@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
+import { useState } from "react";
 
 const investments = [
   {
@@ -26,33 +27,46 @@ const investments = [
     location: "Islamabad",
     startingFrom: "Starting from Rs 3.75 Lac (Total SQFT 50)",
   },
-  
 ];
 
 export default function InvestmentCarousel() {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const scrollLeft = () => {
+    const newPos = scrollPosition - 300;
+    setScrollPosition(newPos < 0 ? 0 : newPos);
+  };
+
+  const scrollRight = () => {
+    setScrollPosition(scrollPosition + 300);
+  };
+
   return (
-    <div className="relative bg-white py-16">
-      <h2 className="text-3xl font-bold mb-12 text-center">Investments</h2>
-      <div className="flex overflow-x-auto space-x-6 px-8">
+    <div className="relative bg-white py-16 overflow-hidden">
+      <h2 className="text-4xl font-extrabold mb-12 text-center text-green-600 animate-fadeIn">
+        Investments
+      </h2>
+
+      <div className="flex overflow-x-auto space-x-6 px-8 transform transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${scrollPosition}px)` }}>
         {investments.map((investment) => (
           <div
             key={investment.id}
-            className="flex-none w-80 bg-white rounded-lg shadow-lg"
+            className="flex-none w-80 bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 relative"
           >
-            <div className="relative">
+            <div className="relative group">
               <img
                 src={investment.image}
                 alt={investment.name}
-                className="w-full h-48 object-cover rounded-t-lg"
+                className="w-full h-48 object-cover rounded-t-lg group-hover:brightness-75 transition-all duration-300"
               />
               {investment.startingFrom && (
-                <span className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 text-xs rounded">
+                <span className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 text-xs rounded animate-pulse">
                   HOT
                 </span>
               )}
             </div>
             <div className="p-4">
-              <div className="text-xl font-bold text-green-600 mb-2">
+              <div className="text-xl font-bold text-green-600 mb-2 transition-transform group-hover:translate-x-1">
                 {investment.price}
               </div>
               <div className="text-md font-semibold mb-1">{investment.name}</div>
@@ -66,16 +80,19 @@ export default function InvestmentCarousel() {
           </div>
         ))}
       </div>
+
       {/* Carousel controls */}
       <Button
         variant="outline"
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-transform hover:scale-110"
+        onClick={scrollLeft}
       >
         <ChevronLeft size={24} />
       </Button>
       <Button
         variant="outline"
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-transform hover:scale-110"
+        onClick={scrollRight}
       >
         <ChevronRight size={24} />
       </Button>

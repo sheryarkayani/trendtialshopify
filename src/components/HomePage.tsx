@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 import InvestmentCarousel from "./InvestmentCarousel";
 import PropertyCarousel from "./PropertyCarousel"; // Import PropertyCarousel
 import ConstructionTimeline from "./ConstructionTimeline";
-import NewsUpdates from "./NewsUpdate";
+import BlogCarousel from "./NewsUpdate";
 import ClientTestimonials from "./ClientsTestimonials";
 import Header from "./Header";
 import HeroSection from "./HeroSection";
@@ -42,7 +42,7 @@ export default function HomePage() {
       {/* Section 5: News/Updates Section */}
       <div className="bg-white py-16">
         <div className="container mx-auto">
-          <NewsUpdates />
+          <BlogCarousel/>
         </div>
       </div>
 
