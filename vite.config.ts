@@ -7,4 +7,8 @@ export default defineConfig({
   define: {
     'process.env': process.env, // this ensures Vite can handle environment variables
   },
+  build: {
+    outDir: 'dist',
+  },
 });
+

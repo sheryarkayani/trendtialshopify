@@ -5,6 +5,7 @@ import { Button } from "../components/ui/button"
 import { TypeAnimation } from 'react-type-animation'
 import Particles from 'react-tsparticles'
 import { loadFull } from 'tsparticles'
+import type { Engine } from "tsparticles-engine";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -32,9 +33,9 @@ export const HeroSection: React.FC = () => {
     }
   }, [controls, inView])
 
-  const particlesInit = async (main: any) => {
-    await loadFull(main)
-  }
+  const particlesInit = async (main: Engine) => {
+    await loadFull(main);
+  };
 
   return (
     <section ref={ref} className="relative bg-[#008060] text-white py-16 md:py-20 overflow-hidden min-h-screen flex items-center justify-center">
