@@ -1,45 +1,95 @@
-import { Button } from "../components/ui/button";
-import { Input } from "./ui/input";
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ShoppingBag, Menu, X } from 'lucide-react'
 
-export default function Header() {
+export const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   return (
-    <header className="bg-[#1e6e41] text-white py-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center px-6">
-        {/* Logo */}
-        <img 
-          src="/logo1.png" 
-          alt="Avenue5 Logo" 
-          className="h-12 mr-12"  /* Adjust the height (h-12) as per your need */
-        />
-
-        {/* Navigation */}
-        <nav className="flex space-x-8 text-lg font-medium">
-          {['ABOUT', 'PROPERTIES', 'PROJECTS', 'BLOG', 'CAREERS', 'CONTACT'].map((item, idx) => (
-            <a
-              key={idx}
-              href={`/${item.toLowerCase()}`}
-              className="hover:text-yellow-300 transition-colors duration-300"
-            >
-              {item}
-            </a>
-          ))}
-        </nav>
-
-        {/* Search and Button */}
-        <div className="flex items-center space-x-4 ml-12">
-          <Input
-            type="text"
-            placeholder="Property ID"
-            className="w-40 bg-white text-black py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-300"
-          />
-          <Button
-            variant="outline"
-            className="bg-[#2e8b57] text-white hover:bg-[#236e44] px-4 py-2 rounded-md transition-all duration-300 shadow-md"
+    <motion.header
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="bg-white shadow-lg"
+    >
+      <div className="container mx-auto py-4 px-4">
+        <nav className="flex justify-between items-center">
+          <motion.div
+            className="flex items-center space-x-2"
+            whileHover={{ scale: 1.05 }}
           >
-            SEND INQUIRY
-          </Button>
-        </div>
+            <ShoppingBag className="w-8 h-8 text-[#008060]" />
+            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#008060] to-[#00a86b]">
+              Trendtial
+            </span>
+          </motion.div>
+
+          <ul className="hidden md:flex space-x-6">
+            {['Services', 'Success', 'Case Studies', 'Contact'].map((item) => (
+              <motion.li key={item} whileHover={{ scale: 1.1 }}>
+                <a
+                  href={`#${item.toLowerCase().replace(' ', '-')}`}
+                  className="relative overflow-hidden group"
+                >
+                  <span className="relative z-10">{item}</span>
+                  <motion.span
+                    className="absolute bottom-0 left-0 w-full h-0.5 bg-[#008060] origin-left"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </a>
+              </motion.li>
+            ))}
+          </ul>
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-[#008060] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#004c3f] transition-colors duration-300 shadow-md"
+          >
+            Get Started
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-[#008060]"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </motion.button>
+        </nav>
       </div>
-    </header>
-  );
+
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white"
+          >
+            <ul className="flex flex-col items-center py-4 space-y-4">
+              {['Services', 'Success', 'Case Studies', 'Contact'].map((item) => (
+                <motion.li
+                  key={item}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <a
+                    href={`#${item.toLowerCase().replace(' ', '-')}`}
+                    className="text-[#008060] font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  )
 }

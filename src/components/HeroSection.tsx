@@ -1,87 +1,156 @@
-import { Button } from "../components/ui/button";
+import React, { useEffect, useRef } from 'react'
+import { motion, useAnimation, useInView } from 'framer-motion'
+import { ArrowRight, ShoppingBag, Star, TrendingUp } from 'lucide-react'
+import { Button } from "../components/ui/button"
+import { TypeAnimation } from 'react-type-animation'
+import Particles from 'react-tsparticles'
+import { loadFull } from 'tsparticles'
 
-// Extract HeroSection component
-function HeroSection() {
-  return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        className="absolute z-0 w-full h-full object-cover"
-      >
-        <source
-          src="https://images.graana.com/video/upload/agency21/2_1/1655993188.mp4"
-          type="video/mp4"
-        />
-        Your browser does not support the video tag.
-      </video>
-
-      {/* Dark Overlay */}
-      <div className="absolute z-5 w-full h-full bg-black bg-opacity-40"></div>
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col min-h-screen text-white">
-        <main className="flex-grow flex items-center justify-center px-4 md:px-12">
-          <div className="container mx-auto flex flex-col items-center justify-center text-center space-y-8 animate-fadeIn">
-            {/* Title with Fade-in Animation */}
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-slideUp pt-16">
-              Bahria Town's Leading<br />Highrise Developer
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-xl md:text-3xl mb-8 animate-slideUp delay-150">
-              <span className="text-yellow-300">Find your new home</span>
-              <br />
-              Search properties for sale and rent in Bahria Town
-            </p>
-
-          {/* Buttons Section */}
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mb-12">
-        <Button
-          variant="outline"
-          className="bg-black text-white border border-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 animate-fadeIn delay-200 py-4 px-8 rounded-lg w-72 text-center flex flex-col items-center justify-center h-24"
-        >
-          <span className="block text-base font-normal mb-1">Selling or Renting out?</span>
-          <span className="block font-bold text-2xl">Free Valuation</span>
-        </Button>
-        <Button
-          className="bg-[#2e8b57] hover:bg-[#236e44] text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 animate-fadeIn delay-300 py-4 px-8 rounded-lg w-72 text-center flex flex-col items-center justify-center h-24"
-        >
-          <span className="block text-base font-normal mb-1">Buying, Renting or Invest?</span>
-          <span className="block font-bold text-2xl">Hot Deals</span>
-        </Button>
-            </div>
-
-            {/* Secondary Button */}
-            <Button className="bg-yellow-400 text-black hover:bg-yellow-500 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 animate-slideUp delay-400 py-6 px-16 text-lg rounded-lg">
-              Looking for Highrise Investment
-            </Button>
-
-            {/* Form Section */}
-            <div className="mt-16 bg-white bg-opacity-20 p-6 rounded-lg flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 max-w-5xl w-full animate-fadeIn delay-500">
-              <select className="bg-white text-black rounded px-4 py-3 flex-grow focus:ring-2 focus:ring-yellow-400 transition-all duration-300 shadow-md">
-                <option>City</option>
-              </select>
-              <select className="bg-white text-black rounded px-4 py-3 flex-grow focus:ring-2 focus:ring-yellow-400 transition-all duration-300 shadow-md">
-                <option>Area</option>
-              </select>
-              <select className="bg-white text-black rounded px-4 py-3 flex-grow focus:ring-2 focus:ring-yellow-400 transition-all duration-300 shadow-md">
-                <option>All Types</option>
-              </select>
-              <Button className="bg-yellow-400 text-black hover:bg-yellow-500 px-12 py-3 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg">
-                BUY
-              </Button>
-              <Button className="bg-yellow-400 text-black hover:bg-yellow-500 px-12 py-3 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg">
-                RENT
-              </Button>
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
-  );
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
 }
 
-export default HeroSection;
+const stagger = {
+  visible: { transition: { staggerChildren: 0.1 } }
+}
+
+const stats = [
+  { icon: ShoppingBag, value: '200+', label: 'Stores Built' },
+  { icon: Star, value: '98%', label: 'Client Satisfaction' },
+  { icon: TrendingUp, value: '5+', label: 'Years of Growth' },
+]
+
+export const HeroSection: React.FC = () => {
+  const controls = useAnimation()
+  const ref = useRef(null)
+  const inView = useInView(ref)
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible')
+    }
+  }, [controls, inView])
+
+  const particlesInit = async (main) => {
+    await loadFull(main)
+  }
+
+  return (
+    <section ref={ref} className="relative bg-[#008060] text-white py-16 md:py-20 overflow-hidden min-h-screen flex items-center justify-center">
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={{
+          fullScreen: { enable: false },
+          background: { color: { value: 'transparent' } },
+          fpsLimit: 60,
+          interactivity: {
+            events: {
+              onClick: { enable: true, mode: 'push' },
+              onHover: { enable: true, mode: 'repulse' },
+              resize: true,
+            },
+            modes: {
+              push: { quantity: 4 },
+              repulse: { distance: 200, duration: 0.4 },
+            },
+          },
+          particles: {
+            color: { value: '#ffffff' },
+            links: { color: '#ffffff', distance: 150, enable: true, opacity: 0.5, width: 1 },
+            move: { direction: 'none', enable: true, outModes: { default: 'bounce' }, random: false, speed: 2, straight: false },
+            number: { density: { enable: true, area: 800 }, value: 80 },
+            opacity: { value: 0.5 },
+            shape: { type: 'circle' },
+            size: { value: { min: 1, max: 5 } },
+          },
+          detectRetina: true,
+        }}
+      />
+      <div className="container mx-auto px-4 relative z-10 flex flex-col items-center justify-center w-full max-w-6xl">
+        <motion.div
+          initial="hidden"
+          animate={controls}
+          variants={stagger}
+          className="text-center w-full px-4"
+        >
+          <motion.h1
+            variants={fadeInUp}
+            className="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-green-200"
+          >
+            <TypeAnimation
+              sequence={[
+                'Dominate Online',
+                2000,
+                'Transform Your Business',
+                2000,
+                'Elevate Your E-commerce',
+                2000,
+              ]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+            />
+            <br />
+            <span className="block">in Pakistan</span>
+          </motion.h1>
+          <motion.p
+            variants={fadeInUp}
+            className="text-lg md:text-2xl mb-6 md:mb-8 max-w-xl mx-auto"
+          >
+            As Pakistan's premier Shopify partner, we transform your vision into a thriving online business.
+          </motion.p>
+          <motion.div
+            variants={fadeInUp}
+            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8 md:mb-12"
+          >
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-[#008060] hover:bg-green-100 hover:text-[#005740] transition-all duration-300 transform hover:scale-105 shadow-lg group w-full sm:w-auto"
+            >
+              <a href="#contact" className="flex items-center justify-center">
+                Start Your Journey
+                <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-white hover:text-[#008060] transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
+            >
+              <a href="#case-studies" className="flex items-center justify-center">
+                View Success Stories
+              </a>
+            </Button>
+          </motion.div>
+          <motion.div
+            variants={stagger}
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 max-w-4xl mx-auto"
+          >
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                className="bg-[#006f52] rounded-lg p-4 md:p-6 flex flex-col items-center justify-center transition-all duration-300 hover:bg-opacity-90 hover:scale-105 group"
+              >
+                <stat.icon className="w-10 h-10 md:w-12 md:h-12 mb-2 md:mb-4 text-white transition-transform duration-300 group-hover:rotate-12" />
+                <motion.span
+                  className="text-2xl md:text-3xl font-bold mb-1 md:mb-2"
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                >
+                  {stat.value}
+                </motion.span>
+                <span className="text-sm md:text-base font-medium">{stat.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
