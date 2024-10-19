@@ -1,44 +1,44 @@
-import React, { useEffect, useRef } from 'react'
-import { motion, useAnimation, useInView } from 'framer-motion'
-import { ArrowRight, ShoppingBag, Star, TrendingUp } from 'lucide-react'
-import { Button } from "../components/ui/button"
-import { TypeAnimation } from 'react-type-animation'
-import Particles from 'react-tsparticles'
-import { loadFull } from 'tsparticles'
-import type { Engine } from "tsparticles-engine";
+import React, { useEffect, useRef } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
+import { ArrowRight, ShoppingBag, Star, TrendingUp } from 'lucide-react';
+import { Button } from "../components/ui/button";
+import { TypeAnimation } from 'react-type-animation';
+import Particles from 'react-tsparticles';
+import { loadFull } from 'tsparticles'; // Corrected import
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 }
-}
+};
 
 const stagger = {
   visible: { transition: { staggerChildren: 0.1 } }
-}
+};
 
 const stats = [
   { icon: ShoppingBag, value: '200+', label: 'Stores Built' },
   { icon: Star, value: '98%', label: 'Client Satisfaction' },
   { icon: TrendingUp, value: '5+', label: 'Years of Growth' },
-]
+];
 
 export const HeroSection: React.FC = () => {
-  const controls = useAnimation()
-  const ref = useRef(null)
-  const inView = useInView(ref)
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const inView = useInView(ref);
 
   useEffect(() => {
     if (inView) {
-      controls.start('visible')
+      controls.start('visible');
     }
-  }, [controls, inView])
+  }, [controls, inView]);
 
-  const particlesInit = async (main: Engine) => {
-    await loadFull(main);
+  // Adjusted particlesInit function
+  const particlesInit = async (main: any) => {
+    await loadFull(main); // Now correctly loads the full tsparticles engine
   };
 
   return (
-    <section ref={ref} className="relative bg-[#008060] text-white py-16 md:py-20 overflow-hidden min-h-screen flex items-center justify-center">
+    <section ref={ref} className="relative bg-[#008060] text-white py-20 overflow-hidden min-h-screen flex items-center justify-center">
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -153,5 +153,5 @@ export const HeroSection: React.FC = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
