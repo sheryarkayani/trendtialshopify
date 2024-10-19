@@ -32,7 +32,7 @@ export const HeroSection: React.FC = () => {
     }
   }, [controls, inView])
 
-  const particlesInit = async (main) => {
+  const particlesInit = async (main: any) => {
     await loadFull(main)
   }
 

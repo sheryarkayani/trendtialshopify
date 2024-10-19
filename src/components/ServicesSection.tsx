@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ShoppingBag, Zap, Package, BarChart } from 'lucide-react'
 import { ServiceCard } from './ServiceCard'

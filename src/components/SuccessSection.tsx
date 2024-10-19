@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { AnimatedCounter } from './AnimatedCounter'
 import { motion, useInView } from 'framer-motion'
 
