@@ -7,7 +7,7 @@ import { useInView } from 'react-intersection-observer'
 
 const caseStudies = [
   {
-    image: 'src/assets/Images/watchstore.png',
+    image: '/assets/Images/watchstore.png',
     heading: 'Watch Direct',
     subheading: 'Premium Watches & Accessories',
     revenue: '1.2M',
@@ -15,7 +15,7 @@ const caseStudies = [
     description: 'Watch Direct saw a significant boost in sales after implementing our custom Shopify solutions.',
   },
   {
-    image: 'src/assets/Images/beautybakrie.png',
+    image: '/assets/Images/beautybakrie.png',
     heading: 'Beauty Bakerie',
     subheading: 'Cosmetics That Inspire',
     revenue: '2.5M',
