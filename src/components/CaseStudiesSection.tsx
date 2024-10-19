@@ -4,10 +4,19 @@ import { ArrowRight, ArrowLeft, ExternalLink, ChevronDown } from 'lucide-react'
 import { Button } from "../components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../components/ui/dialog"
 import { useInView } from 'react-intersection-observer'
+import watchstoreImage from '../assets/Images/watchstore.png';
+import beautybakrieImage from '../assets/Images/beautybakrie.png';
+import petluxeImage from '../assets/Images/petluxe.png';
+import lafahImage from '../assets/Images/lafah.png';
+import coffeeImage from '../assets/Images/coffee.png';
+import skcosmeticsImage from '../assets/Images/skcosmetics.png';
+import kitchenImage from '../assets/Images/kitchen.png';
+import neonImage from '../assets/Images/neon.png';
+import partyImage from '../assets/Images/party.png';
 
 const caseStudies = [
   {
-    image: '/assets/Images/watchstore.png',
+    image: watchstoreImage,
     heading: 'Watch Direct',
     subheading: 'Premium Watches & Accessories',
     revenue: '1.2M',
@@ -15,7 +24,7 @@ const caseStudies = [
     description: 'Watch Direct saw a significant boost in sales after implementing our custom Shopify solutions.',
   },
   {
-    image: '/assets/Images/beautybakrie.png',
+    image: beautybakrieImage,
     heading: 'Beauty Bakerie',
     subheading: 'Cosmetics That Inspire',
     revenue: '2.5M',
@@ -23,7 +32,7 @@ const caseStudies = [
     description: 'Our tailored marketing strategies helped Beauty Bakerie reach a wider audience and increase conversions.',
   },
   {
-    image: 'src/assets/Images/petluxe.png',
+    image: petluxeImage,
     heading: 'Pet Luxe',
     subheading: 'Pet Care & Accessories',
     revenue: '800K',
@@ -31,7 +40,7 @@ const caseStudies = [
     description: 'Pet Luxe experienced rapid growth with our optimized product pages and streamlined checkout process.',
   },
   {
-    image: 'src/assets/Images/lafah.png',
+    image: lafahImage,
     heading: 'Lafah Scarf',
     subheading: 'Trendy Hijabs & Scarves',
     revenue: '1.5M',
@@ -39,7 +48,7 @@ const caseStudies = [
     description: 'Lafah Scarf expanded their market reach globally with our international shipping and currency solutions.',
   },
   {
-    image: 'src/assets/Images/coffee.png',
+    image: coffeeImage,
     heading: 'Dona Fello',
     subheading: 'Delicious Coffee & Sweets',
     revenue: '950K',
@@ -47,7 +56,7 @@ const caseStudies = [
     description: 'Dona Fellos subscription model, implemented by our team, led to consistent revenue growth.',
   },
   {
-    image: 'src/assets/Images/skcosmetics.png',
+    image: skcosmeticsImage,
     heading: 'SK Cosmetics',
     subheading: 'Beauty Essentials & Makeup',
     revenue: '3M',
@@ -55,7 +64,7 @@ const caseStudies = [
     description: 'SK Cosmetics leveraged our influencer marketing strategies to become a leader in the beauty industry.',
   },
   {
-    image: 'src/assets/Images/kitchen.png',
+    image: kitchenImage,
     heading: 'My Kitchen',
     subheading: 'Kitchenware & Home Essentials',
     revenue: '1.8M',
@@ -63,7 +72,7 @@ const caseStudies = [
     description: 'My Kitchens sales skyrocketed after we implemented advanced product filtering and recommendation systems.',
   },
   {
-    image: 'src/assets/Images/neon.png',
+    image: neonImage,
     heading: 'NEON',
     subheading: 'Innovative Gadgets & Accessories',
     revenue: '2.2M',
@@ -71,7 +80,7 @@ const caseStudies = [
     description: 'NEONs conversion rates improved dramatically with our optimized mobile shopping experience.',
   },
   {
-    image: 'src/assets/Images/party.png',
+    image: partyImage,
     heading: 'Kids Essentials',
     subheading: 'Stay Tuned for More!',
     revenue: '1.1M',
